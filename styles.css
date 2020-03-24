@@ -1,4 +1,59 @@
- p {
-     font-size: large;
-     background-color: aquamarine;
- }
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        border: 0;
+        background-color: white;
+    }
+
+    p {
+        font-size: large;
+        background-color: aquamarine;
+    }
+
+    .contenedor {
+        display: grid;
+        grid-template-columns: [first] 100% [end];
+        grid-template-rows: [header] 10% [body] auto [footer] 25% [end];
+        grid-gap: 10px;
+        color: #444;
+        /*Las 3 siguientes lineas de codigo producen que el #contener llene por completo el cuerpo de la pagina.*/
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        grid-template-areas:
+            "header"
+            "main"
+            "footer";
+    }
+
+    .box {
+        background-color: white;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 150%;
+    }
+
+    .a {
+        grid-area: header;
+        background-color: greenyellow;
+        grid-column: first / end;
+        grid-row: header / span 1;
+    }
+
+    .b {
+        grid-area: main;
+        background-color: lightblue;
+        grid-column: first / end;
+        grid-row: body / span 1;
+    }
+
+    .c {
+        grid-area: footer;
+        background-color: lightcoral;
+        grid-column: first / end;
+        grid-row: footer / span 1;
+    }
+    
+    
