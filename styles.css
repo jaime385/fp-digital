@@ -75,7 +75,7 @@
             "costadoiz""content""costadoder"
             "costadoiz""content""costadoder";
     }
-
+    /*Lo siguiente es muy importante*/
     .a1 {
         grid-area: content;
         background-color: lightblue;
