@@ -59,14 +59,15 @@
         -webkit-animation: neon1 1s ease-in-out infinite alternate;
         -moz-animation: neon1 1s ease-in-out infinite alternate;
         animation: neon1 1s ease-in-out infinite alternate;
+        color: rgb(255,0,0,0.9);
     }
 
-    @-webkit-keyframes neon1 {
+    @keyframes neon1 {
         from {  
-          text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+          text-shadow: 0 0 10px red, 0 0 100px red, 0 0 30px red, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
         }
         to {
-          text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+          text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
         }
       }
 
@@ -96,4 +97,11 @@
         grid-area: content;
         grid-column: second / span third;
         grid-row: num1 / end;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
     }
