@@ -4,8 +4,9 @@
         height: 100%;
         width: 100%;
         border: 0;
-        background-color: black;
+        background-color: white;
         font-size: 16px;
+        
     }
 
     p,li {
@@ -13,8 +14,7 @@
         font-size: 1rem;
         line-height: 1.25;
         margin-bottom: 0.5em;
-        background-color: aquamarine;
-        color: red;
+        color:white;
     }
 
     .contenedor {
@@ -41,31 +41,31 @@
 
     .a {
         grid-area: header;
-        background-color: greenyellow;
         grid-column: first / end;
         grid-row: header / span 1;
+        background: repeating-linear-gradient(45deg, greenyellow 0%, #2b2b2b 10%, #222222 0%, #222222 50%) 0 / 15px 15px;
     }
 
     .b {
         grid-area: main;
-        background-color: lightblue;
         grid-column: first / end;
         grid-row: body / span 1;
+        background: repeating-linear-gradient(45deg, greenyellow 0%, #2b2b2b 10%, #222222 0%, #222222 100%) 0 / 15px 15px;
     }
 
     .c {
         grid-area: footer;
-        background-color: lightcoral;
         grid-column: first / end;
         grid-row: footer / span 1;
+        background: repeating-linear-gradient(135deg, greenyellow 0%, #2b2b2b 10%, #222222 0%, #222222 50%) 0 / 15px 15px;
     }
 
     /*Las siguientes lineas seran dedicadas a la seccion que contiene el div con clase de nombre contenedor1
     Momentaneamente se le asignara texto a esta seccion para el prototipado rapido de la misma*/
     .contenedor1 {
         display: grid;
-        grid-template-columns: [first] 1% [second] 93% [third] 6% [end];
-        grid-template-rows: [num1] 10% [contenido1] auto [num2] 20% [end];
+        grid-template-columns: [first] 1% [second] 97% [third] 2% [end];
+        grid-template-rows: [num1] 1% [contenido1] auto [num2] 20% [end];
         grid-gap: 0px;
         color: #444;
         justify-items: stretch;
@@ -77,7 +77,6 @@
     /*Lo siguiente es muy importante*/
     .a1 {
         grid-area: content;
-        background-color: lightblue;
         grid-column: second / span third;
         grid-row: num1 / end;
     }
