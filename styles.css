@@ -4,12 +4,18 @@
         height: 100%;
         width: 100%;
         border: 0;
-        background-color: white;
+        background-color: black;
+        font-size: 16px;
     }
 
-    p {
-        font-size: large;
+    p,
+    li {
+        /*Las siguientes 3 lineas presetan una buena practica con css, esta es, utilizar medidas relativas en vez de pixeles*/
+        font-size: 1rem;
+        line-height: 1.25;
+        margin-bottom: 0.5em;
         background-color: aquamarine;
+        color: red;
     }
 
     .contenedor {
@@ -32,7 +38,6 @@
         background-color: white;
         color: #fff;
         border-radius: 5px;
-        font-size: 150%;
     }
 
     .a {
@@ -55,5 +60,25 @@
         grid-column: first / end;
         grid-row: footer / span 1;
     }
-    
-    
+
+    /*Las siguientes lineas seran dedicadas a la seccion que contiene el div con clase de nombre contenedor1
+    Momentaneamente se le asignara texto a esta seccion para el prototipado rapido de la misma*/
+    .contenedor1 {
+        display: grid;
+        grid-template-columns: [first] 1% [second] 93% [third] 6% [end];
+        grid-template-rows: [num1] 10% [contenido1] auto [num2] 20% [end];
+        grid-gap: 0px;
+        color: #444;
+        justify-items: stretch;
+        grid-template-areas:
+            "costadoiz""content""costadoder"
+            "costadoiz""content""costadoder"
+            "costadoiz""content""costadoder";
+    }
+
+    .a1 {
+        grid-area: content;
+        background-color: lightblue;
+        grid-column: second / span third;
+        grid-row: num1 / end;
+    }
