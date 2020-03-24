@@ -8,8 +8,7 @@
         font-size: 16px;
     }
 
-    p,
-    li {
+    p,li {
         /*Las siguientes 3 lineas presetan una buena practica con css, esta es, utilizar medidas relativas en vez de pixeles*/
         font-size: 1rem;
         line-height: 1.25;
