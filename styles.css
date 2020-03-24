@@ -6,7 +6,7 @@
         border: 0;
         background-color: white;
         font-size: 16px;
-        
+        font-family: 'Baloo Da 2', cursive;
     }
 
     p,li {
@@ -14,7 +14,7 @@
         font-size: 1rem;
         line-height: 1.25;
         margin-bottom: 0.5em;
-        color:white;
+        color: white;
     }
 
     .contenedor {
@@ -52,6 +52,23 @@
         grid-row: body / span 1;
         background: repeating-linear-gradient(45deg, greenyellow 0%, #2b2b2b 10%, #222222 0%, #222222 100%) 0 / 15px 15px;
     }
+
+    .estado {
+        text-align: center;
+        font-size: 2em;
+        -webkit-animation: neon1 1s ease-in-out infinite alternate;
+        -moz-animation: neon1 1s ease-in-out infinite alternate;
+        animation: neon1 1s ease-in-out infinite alternate;
+    }
+
+    @-webkit-keyframes neon1 {
+        from {  
+          text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+        }
+        to {
+          text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+        }
+      }
 
     .c {
         grid-area: footer;
