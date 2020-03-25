@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Da+2&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
     <title>Inicializacion del proyecto</title>
 </head>
 
@@ -43,7 +44,10 @@
                             ipsum.</li>
                     </ul>
                     <p class="estado">Datos de Covid-19</p>
-                    <div id = "cont a2">
+                    <div>
+                        <canvas id="myChart" width="800px" height="400px"></canvas>
+                    </div>
+                    <div id="cont a2">
                         <div id="cv" class="estado"></div>
                         <div id="div1"></div>
                     </div>
@@ -55,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <div class="box c"><canvas id="canvas1" width="150" height="150"></canvas>
+        <div class="box c">
         </div>
     </div>
     <script src="func.js"></script>

@@ -11,11 +11,11 @@ async function getmeme() {
     //Corona virus data
     const corona = await fetch('https://coronavirus-19-api.herokuapp.com/countries'); // this is a string so we want to convert it to json format.
     const virus = await corona.json();
-    console.log(virus);
+    //console.log(virus);
     //Titulo para el contenido covid-19
     const titulo = await fetch('https://coronavirus-19-api.herokuapp.com/all'); // this is a string so we want to convert it to json format.
     const cvt = await titulo.json();
-    console.log(cvt);
+    //console.log(cvt);
     //Presentacion de los datos:
     const titroot = document.createElement('Div');
     //Div para cantidad de muerter global
@@ -36,6 +36,9 @@ async function getmeme() {
     cvtt.append(titroot);
     document.getElementById("cont a2").appendChild(cvtt);
     //Presentacion de datos por pais.
+    contador = 0;
+    var t = [];
+    var cas = [];
     for (item of virus) {
         //Div padre de todos.
         const root = document.createElement('Div');
@@ -83,7 +86,21 @@ async function getmeme() {
         //Enpaquetado de todo en el div padre de todos.
         covid.append(root);
         document.getElementById("cont a2").appendChild(covid);
+
+        let countries = item.country;
+        let casese = item.cases;
+        //console.log(countries);
+        contador++;
+        //console.log(contador);
+        t[contador] = countries;
+        cas[contador] = casese;
+
     }
+    //console.log(t);
+    return {
+        paises: t,
+        casos: cas
+    };
 }
 
 /* Returns a random number between min (inclusive) and max (inclusive)*/
@@ -92,10 +109,107 @@ function between(min, max) {
         Math.random() * (max - min + 1) + min
     )
 }
-getmeme();
-/*const canvas = document.getElementById('canvas1');
-const ctx = canvas.getContext('2d');
-ctx.fillStyle = 'yellowgreen';
-ctx.fillRect(10, 10, 150, 100);*/
+
+//Se invocan funcion es asyncronas.
+plot();
+
+//Creacion de graficos con el framework chart.js
+async function plot() {
+    //Are the next 2 lines a closure example??
+    const x = await getmeme();
+    console.log(x.paises);
+    var ctx = document.getElementById('myChart').getContext('2d');
+    const datax = x.paises;
+    const datay = x.casos;
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: datax,
+            datasets: [{
+                label: '# of Cases',
+                data: datay,
+                backgroundColor: [
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        fontSize: 10
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontSize: 1
+                    }
+                }]
+            }
+        }
+    });
+}
+//Prueba efecto parallax en paraffo.
 var scene = document.getElementById('scene');
 var parallaxInstance = new Parallax(scene);
