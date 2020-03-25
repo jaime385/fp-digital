@@ -14,7 +14,7 @@
         font-size: 1rem;
         line-height: 1.25;
         margin-bottom: 0.5em;
-        color: white;
+        color:yellowgreen;
     }
 
     .contenedor {
@@ -83,9 +83,9 @@
     .contenedor1 {
         display: grid;
         grid-template-columns: [first] 1% [second] 97% [third] 2% [end];
-        grid-template-rows: [num1] 1% [contenido1] auto [num2] 20% [end];
+        grid-template-rows: [num1] 1% [contenido1] auto [num2] auto [end];
         grid-gap: 0px;
-        color: #444;
+        color: yellowgreen;
         justify-items: stretch;
         grid-template-areas:
             "costadoiz""content""costadoder"
@@ -97,6 +97,11 @@
         grid-area: content;
         grid-column: second / span third;
         grid-row: num1 / end;
+    }
+
+    .a2 {
+        grid-column: second / span third;
+        grid-row: num2 / end;
     }
 
     .center {
