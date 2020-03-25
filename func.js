@@ -12,6 +12,30 @@ async function getmeme() {
     const corona = await fetch('https://coronavirus-19-api.herokuapp.com/countries'); // this is a string so we want to convert it to json format.
     const virus = await corona.json();
     console.log(virus);
+    //Titulo para el contenido covid-19
+    const titulo = await fetch('https://coronavirus-19-api.herokuapp.com/all'); // this is a string so we want to convert it to json format.
+    const cvt = await titulo.json();
+    console.log(cvt);
+    //Presentacion de los datos:
+    const titroot = document.createElement('Div');
+    //Div para cantidad de muerter global
+    const mg = document.createElement('Div');
+    //Div para cantidad de casos globales
+    const cg = document.createElement('Div');
+    //Div para cantidad de recuperados global
+    const rg = document.createElement('Div');
+    titroot.append(mg, cg, rg);
+    //Cantidad de muerter total:
+    mg.textContent = `Total de muertes: ${cvt.deaths}`;
+    //Cantidad de casos total:
+    cg.textContent = `Total de casos: ${cvt.cases}`;
+    //Cantidad de recuperados
+    rg.textContent = `Recuperados: ${cvt.recovered}`;
+    const cvtt = document.getElementById('cv');
+    //Enpaquetado de todo en el div padre de todos.
+    cvtt.append(titroot);
+    document.getElementById("cont a2").appendChild(cvtt);
+    //Presentacion de datos por pais.
     for (item of virus) {
         //Div padre de todos.
         const root = document.createElement('Div');
@@ -33,8 +57,8 @@ async function getmeme() {
         const cpm = document.createElement('Div');
         //Muertes por millon de habitantes
         const mpm = document.createElement('Div');
-         
-        root.append(geo,tdeaths,casosn,mtotal,recup,acti,criti,cpm,mpm);
+
+        root.append(geo, tdeaths, casosn, mtotal, recup, acti, criti, cpm, mpm);
 
         //Cantidad de casos por pais:
         geo.textContent = `${item.country}: ${item.cases}`;
