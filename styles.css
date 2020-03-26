@@ -6,7 +6,7 @@
         border: 0;
         background-color: white;
         font-size: 16px;
-        font-family: 'Baloo Da 2', cursive;
+        font-family: 'Baloo Da 2';
     }
 
     p,li {
@@ -20,7 +20,7 @@
     .contenedor {
         display: grid;
         grid-template-columns: [first] 100% [end];
-        grid-template-rows: [header] 10% [body] auto [footer] 25% [end];
+        grid-template-rows: [header] 10% [body] auto [footer] auto [end];
         grid-gap: 10px;
         color: #444;
         /*Las 3 siguientes lineas de codigo producen que el #contener llene por completo el cuerpo de la pagina.*/
@@ -56,15 +56,15 @@
     .estado {
         text-align: center;
         font-size: 2em;
-        -webkit-animation: neon1 1s ease-in-out infinite alternate;
-        -moz-animation: neon1 1s ease-in-out infinite alternate;
-        animation: neon1 1s ease-in-out infinite alternate;
+        -webkit-animation: neon1 2s ease-in-out infinite alternate;
+        -moz-animation: neon1 2s ease-in-out infinite alternate;
+        animation: neon1 2s ease-in-out infinite alternate;
         color: rgb(255,0,0,0.9);
     }
 
     @keyframes neon1 {
         from {  
-          text-shadow: 0 0 10px red, 0 0 100px red, 0 0 30px red, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+          text-shadow: 0 0 10px red, 0 0 10px red, 0 0 30px red, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
         }
         to {
           text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
