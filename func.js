@@ -1,13 +1,6 @@
 console.log('Primer linea javascript');
-/* La funcion get meme y between simplemente realizan un api call obteniendo una base para meme.*/
+
 async function getmeme() {
-    /*const response = await fetch('https://api.imgflip.com/get_memes'); // this is a string so we want to convert it to json format.
-    const data = await response.json();
-    //console.log(data);
-    const ramdom = between(0, 99); // La api call contiene 100 memes.
-    //console.log(ramdom);
-    const meme = data.data.memes[ramdom].url;
-    document.getElementById('meme').src = meme;*/
     //Corona virus data
     const corona = await fetch('https://coronavirus-19-api.herokuapp.com/countries'); // this is a string so we want to convert it to json format.
     const virus = await corona.json();
@@ -40,6 +33,7 @@ async function getmeme() {
     var t = [];
     var cas = [];
     var muertes = [];
+    var criticos = [];
     for (item of virus) {/* ------------------------- Codigo por pasar a otra pagina---------------------------------------
         //Div padre de todos.
         const root = document.createElement('Div');
@@ -91,143 +85,67 @@ async function getmeme() {
         let countries = item.country;
         let casese = item.cases;
         let muert = item.deaths;
-        //console.log(countries);
+        let criti = item.critical;
         contador++;
-        //console.log(contador);
         t[contador] = countries;
         cas[contador] = casese;
         muertes[contador] = muert;
-    }
-    //console.log(t);
+        criticos[contador] = criti;
+     }
     return {
         paises: t,
         casos: cas,
-        muertes: muertes
+        muertes: muertes,
+        criticos: criticos
     };
 }
 
-/* Returns a random number between min (inclusive) and max (inclusive)*/
-function between(min, max) {
-    return Math.floor(
-        Math.random() * (max - min + 1) + min
-    )
-}
-
-//Se invocan funcion es asyncronas.
+//Se invoca la funcion asyncrona.
 plot();
 
 //Creacion de graficos con el framework chart.js
 async function plot() {
     //Are the next 2 lines a closure example??
     const x = await getmeme();
-    //console.log(x.paises);
-    var ctx = document.getElementById('myChart').getContext('2d');
+    //Paises
     const datax = x.paises;
-    var slicedatax = datax.slice(1, 11);
-    //console.log(slicedatax);
-    const datay = x.casos;
-    const slicedatay = datay.slice(1, 11);
-    var myChart = new Chart(ctx, {
-        type: 'horizontalBar',
-        data: {
-            labels: slicedatax,
-            datasets: [{
-                label: 'Cantidad:',
-                data: slicedatay,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(72, 112, 132, 0.2)',
-                    'rgba(167, 162, 235, 0.2)',
-                    'rgba(255, 206, 111, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(40, 112, 89, 0.2)',
-                    'rgba(20, 145, 255, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(72, 112, 132, 1)',
-                    'rgba(167, 162, 235, 1)',
-                    'rgba(255, 206, 111, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(40, 112, 89, 1)',
-                    'rgba(20, 145, 255, 1)'
-                ],
-                borderWidth: 1,
-                barPercentage: 0.5,
-                barThickness: 6,
-                maxBarThickness: 8,
-                minBarLength: 2
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        fontSize: 14,
-                        fontColor: 'yellowgreen'
-                    },
-                    barPercentage: 0.9,
-                    barThickness: 15
-                }],
-                xAxes: [{
-                    ticks: {
-                        fontSize: 14,
-                        fontColor: 'yellowgreen',
-                        max: datay[0],
-                        min: 0,
-                        stepSize: 1
-                    }
-                }]
-            },
-            legend: {
-                display: true,
-                labels: {
-                    fontColor: 'yellowgreen',
-                    fontSize: 14
-                },
-            },
-            title: {
-                display: true,
-                text: 'Los 10 Paises con mas casos.',
-                fontColor: 'yellowgreen',
-                fontSize: 14
-            },
-            /*Problema solucionado gracias a la fuente: https://stackoverflow.com/questions/38304357/is-it-possible-to-add-a-custom-font-to-chart-js*/
-            defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Baloo Da 2'"
-        }
-    });
+    //Casos grafico 1
+    const cases = x.casos;
+    //Muertes Grafico 2 
+    const deaths = x.muertes;
+    //Pacientes en estado critico
+    const critical = x.criticos;
 
-    /* Nuevo grafico*/
-    var ctx1 = document.getElementById('myChart1').getContext('2d');
-    const datax1 = x.paises;
-    var slicedatax1 = datax1.slice(1, 11);
-    const datay1 = x.muertes;
-    const slicedatay1 = datay1.slice(1, 11);
-    var myChart = new Chart(ctx1, {
+    //Plots
+    plotting(datax, cases,'myChart');
+    plotting(datax, deaths,'myChart1');
+    plotting(datax, critical,'myChart2');
+}
+
+function plotting(datax, datay,id) {
+    var ct = document.getElementById(id).getContext('2d');
+    const slicingx = datax.slice(1, 11);
+    const slicingy = datay.slice(1,11);
+    //console.log(slicingx); ------Debugging------
+    //console.log(slicingy);
+    var myChart = new Chart(ct, {
         type: 'horizontalBar',
         data: {
-            labels: slicedatax1,
+            labels: slicingx,
             datasets: [{
                 label: 'Cantidad:',
-                data: slicedatay1,
+                data: slicingy,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(72, 112, 132, 0.2)',
-                    'rgba(167, 162, 235, 0.2)',
-                    'rgba(255, 20, 111, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(40, 112, 89, 0.2)',
-                    'rgba(20, 145, 255, 0.2)'
+                    'rgba(255, 99, 132, 0.3)',
+                    'rgba(54, 162, 235, 0.3)',
+                    'rgba(255, 206, 86, 0.3)',
+                    'rgba(75, 192, 192, 0.3)',
+                    'rgba(72, 112, 132, 0.3)',
+                    'rgba(167, 162, 235, 0.3)',
+                    'rgba(255, 20, 111, 0.3)',
+                    'rgba(75, 192, 192, 0.3)',
+                    'rgba(40, 112, 89, 0.3)',
+                    'rgba(20, 145, 255, 0.3)'
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -241,11 +159,7 @@ async function plot() {
                     'rgba(40, 112, 89, 1)',
                     'rgba(20, 145, 255, 1)'
                 ],
-                borderWidth: 1,
-                barPercentage: 0.5,
-                barThickness: 6,
-                maxBarThickness: 8,
-                minBarLength: 2
+                borderWidth: 1.5
             }]
         },
         options: {
@@ -257,7 +171,10 @@ async function plot() {
                         fontColor: 'yellowgreen'
                     },
                     barPercentage: 0.9,
-                    barThickness: 15
+                    barThickness: 8,
+                    maxBarThickness: 25,
+                    minBarLength: 2,
+                    minBarThickness: 8
                 }],
                 xAxes: [{
                     ticks: {
@@ -287,6 +204,3 @@ async function plot() {
         }
     });
 }
-/*Prueba efecto parallax en paraffo.
-var scene = document.getElementById('scene');
-var parallaxInstance = new Parallax(scene);*/
