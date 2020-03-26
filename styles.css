@@ -6,7 +6,7 @@
         border: 0;
         background-color: white;
         font-size: 16px;
-        font-family: 'Baloo Da 2';
+        font-family: 'Baloo Da 2', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Helvetica;
     }
 
     p,li {
@@ -20,7 +20,7 @@
     .contenedor {
         display: grid;
         grid-template-columns: [first] 100% [end];
-        grid-template-rows: [header] 10% [body] auto [footer] auto [end];
+        grid-template-rows: [header] auto [body] auto [footer] auto [end];
         grid-gap: 10px;
         color: #444;
         /*Las 3 siguientes lineas de codigo producen que el #contener llene por completo el cuerpo de la pagina.*/
