@@ -5,4 +5,4 @@ Especial agradecimiento a todos los colaboradores que estan manteniendo el sigui
 
 Link : https://github.com/javieraviles/covidAPI
 
-Proximamente abra un enlace a la pagina.
+Link de la implementacion de la API: https://jaime385.github.io/FatalPandemics/index.html
