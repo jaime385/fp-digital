@@ -39,7 +39,7 @@ async function getmeme() {
     contador = 0;
     var t = [];
     var cas = [];
-    for (item of virus) {
+    for (item of virus) {/* ------------------------- Codigo por pasar a otra pagina---------------------------------------
         //Div padre de todos.
         const root = document.createElement('Div');
         //Div de cantidad de casos por pais.
@@ -86,7 +86,7 @@ async function getmeme() {
         //Enpaquetado de todo en el div padre de todos.
         covid.append(root);
         document.getElementById("cont a2").appendChild(covid);
-
+        */
         let countries = item.country;
         let casese = item.cases;
         //console.log(countries);
