@@ -34,69 +34,31 @@ async function getmeme() {
     var cas = [];
     var muertes = [];
     var criticos = [];
-    for (item of virus) {/* ------------------------- Codigo por pasar a otra pagina---------------------------------------
-        //Div padre de todos.
-        const root = document.createElement('Div');
-        //Div de cantidad de casos por pais.
-        const geo = document.createElement('Div');
-        //Div de muertes por pais diarias.
-        const tdeaths = document.createElement('Div');
-        //Div de nuevos casos
-        const casosn = document.createElement('Div');
-        //Div de muertes totales
-        const mtotal = document.createElement('Div');
-        //Div de recuperados
-        const recup = document.createElement('Div');
-        //Casos activos
-        const acti = document.createElement('Div');
-        //Casos en estado critico
-        const criti = document.createElement('Div');
-        //Casos por millon de habitantes
-        const cpm = document.createElement('Div');
-        //Muertes por millon de habitantes
-        const mpm = document.createElement('Div');
-
-        root.append(geo, tdeaths, casosn, mtotal, recup, acti, criti, cpm, mpm);
-
-        //Cantidad de casos por pais:
-        geo.textContent = `${item.country}: ${item.cases}`;
-        //Cantidad de muertes por pais diarias:
-        tdeaths.textContent = `Muertos hoy: ${item.todayDeaths}`;
-        //Cantidad de casos nuevos:
-        casosn.textContent = `Casos nuevos hoy: ${item.todayCases}`;
-        //Cantidad de muertes totales:
-        mtotal.textContent = `Cantidad de muertos total: ${item.deaths}`;
-        //Cantidad de recuperados:
-        recup.textContent = `Cantidad de recuperados: ${item.recovered}`;
-        //Cantidad de casos activos
-        acti.textContent = `Cantidad de casos activos: ${item.active}`;
-        //Cantidad de casos en estado critico
-        criti.textContent = `Cantidad de casos en estado critico: ${item.critical}`;
-        //Cantidad de casos por millon:
-        cpm.textContent = `Casos por millon de habitantes: ${item.casesPerOneMillion}`
-        //Cantidad de meurtes por millon
-        mpm.textContent = `Muertes por millon de habitantes: ${item.deathsPerOneMillion}`;
-
-        const covid = document.getElementById('div1');
-        //Enpaquetado de todo en el div padre de todos.
-        covid.append(root);
-        document.getElementById("cont a2").appendChild(covid);
-        */
+    var activos = [];
+    var muertesHoy = [];
+    for (item of virus) {
+        /*Datos:*/
         let countries = item.country;
         let casese = item.cases;
         let muert = item.deaths;
         let criti = item.critical;
+        let act = item.active;
+        let xxx = item.todayDeaths;
         contador++;
         t[contador] = countries;
         cas[contador] = casese;
         muertes[contador] = muert;
         criticos[contador] = criti;
+        activos[contador] = act;
+        muertesHoy[contador] = xxx;
      }
     return {
         paises: t,
         casos: cas,
         muertes: muertes,
-        criticos: criticos
+        criticos: criticos,
+        activos: activos,
+        muertosHoy: muertesHoy
     };
 }
 
@@ -115,14 +77,19 @@ async function plot() {
     const deaths = x.muertes;
     //Pacientes en estado critico
     const critical = x.criticos;
-
+    //Pacientes actualmente con la enfermedad
+    const ac = x.activos;
+    //Numero total de muertes hoy
+    const mh = x.muertosHoy;
     //Plots
-    plotting(datax, cases,'myChart');
-    plotting(datax, deaths,'myChart1');
-    plotting(datax, critical,'myChart2');
+    plotting(datax, cases,'myChart','Número de casos mundialmente:');
+    plotting(datax, deaths,'myChart1','Número de muertes mundialmente:');
+    plotting(datax, critical,'myChart2','Pacientes en estado crítico mundialmente:');
+    plotting(datax, ac,'myChart3','Pacientes activos con la enfermedad:');
+    plotting(datax, mh,'myChart4','Muertos el día de hoy:');
 }
-
-function plotting(datax, datay,id) {
+//Esta funcion plotea los datos.
+function plotting(datax, datay,id,title) {
     var ct = document.getElementById(id).getContext('2d');
     const slicingx = datax.slice(1, 11);
     const slicingy = datay.slice(1,11);
@@ -195,7 +162,7 @@ function plotting(datax, datay,id) {
             },
             title: {
                 display: true,
-                text: 'Los 10 Paises con mas muertes.',
+                text: `${title}`,
                 fontColor: 'yellowgreen',
                 fontSize: 14
             },
