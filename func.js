@@ -39,6 +39,7 @@ async function getmeme() {
     contador = 0;
     var t = [];
     var cas = [];
+    var muertes = [];
     for (item of virus) {/* ------------------------- Codigo por pasar a otra pagina---------------------------------------
         //Div padre de todos.
         const root = document.createElement('Div');
@@ -89,17 +90,19 @@ async function getmeme() {
         */
         let countries = item.country;
         let casese = item.cases;
+        let muert = item.deaths;
         //console.log(countries);
         contador++;
         //console.log(contador);
         t[contador] = countries;
         cas[contador] = casese;
-
+        muertes[contador] = muert;
     }
     //console.log(t);
     return {
         paises: t,
-        casos: cas
+        casos: cas,
+        muertes: muertes
     };
 }
 
@@ -141,7 +144,7 @@ async function plot() {
                     'rgba(255, 206, 111, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(40, 112, 89, 0.2)',
-                    'rgba(20, 145, 86, 0.2)'
+                    'rgba(20, 145, 255, 0.2)'
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -153,7 +156,7 @@ async function plot() {
                     'rgba(255, 206, 111, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(40, 112, 89, 1)',
-                    'rgba(20, 145, 86, 1)'
+                    'rgba(20, 145, 255, 1)'
                 ],
                 borderWidth: 1,
                 barPercentage: 0.5,
@@ -168,8 +171,7 @@ async function plot() {
                     ticks: {
                         beginAtZero: true,
                         fontSize: 14,
-                        fontColor: 'yellowgreen',
-                        defaultFontFamily: 'Baloo Da 2'
+                        fontColor: 'yellowgreen'
                     },
                     barPercentage: 0.9,
                     barThickness: 15
@@ -180,23 +182,108 @@ async function plot() {
                         fontColor: 'yellowgreen',
                         max: datay[0],
                         min: 0,
-                        stepSize: 1,
-                        defaultFontFamily: 'Baloo Da 2'
+                        stepSize: 1
                     }
                 }]
             },
             legend: {
                 display: true,
                 labels: {
-                    fontColor: 'yellowgreen'
-                }
+                    fontColor: 'yellowgreen',
+                    fontSize: 14
+                },
             },
             title: {
                 display: true,
                 text: 'Los 10 Paises con mas casos.',
                 fontColor: 'yellowgreen',
-                defaultFontFamily: 'Baloo Da 2'
-            }
+                fontSize: 14
+            },
+            /*Problema solucionado gracias a la fuente: https://stackoverflow.com/questions/38304357/is-it-possible-to-add-a-custom-font-to-chart-js*/
+            defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Baloo Da 2'"
+        }
+    });
+
+    /* Nuevo grafico*/
+    var ctx1 = document.getElementById('myChart1').getContext('2d');
+    const datax1 = x.paises;
+    var slicedatax1 = datax1.slice(1, 11);
+    const datay1 = x.muertes;
+    const slicedatay1 = datay1.slice(1, 11);
+    var myChart = new Chart(ctx1, {
+        type: 'horizontalBar',
+        data: {
+            labels: slicedatax1,
+            datasets: [{
+                label: 'Cantidad:',
+                data: slicedatay1,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(72, 112, 132, 0.2)',
+                    'rgba(167, 162, 235, 0.2)',
+                    'rgba(255, 20, 111, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(40, 112, 89, 0.2)',
+                    'rgba(20, 145, 255, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(72, 112, 132, 1)',
+                    'rgba(167, 162, 235, 1)',
+                    'rgba(255, 20, 111, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(40, 112, 89, 1)',
+                    'rgba(20, 145, 255, 1)'
+                ],
+                borderWidth: 1,
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        fontSize: 14,
+                        fontColor: 'yellowgreen'
+                    },
+                    barPercentage: 0.9,
+                    barThickness: 15
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontSize: 14,
+                        fontColor: 'yellowgreen',
+                        max: datay[0],
+                        min: 0,
+                        stepSize: 1
+                    }
+                }]
+            },
+            legend: {
+                display: true,
+                labels: {
+                    fontColor: 'yellowgreen',
+                    fontSize: 14
+                },
+            },
+            title: {
+                display: true,
+                text: 'Los 10 Paises con mas muertes.',
+                fontColor: 'yellowgreen',
+                fontSize: 14
+            },
+            /*Problema solucionado gracias a la fuente: https://stackoverflow.com/questions/38304357/is-it-possible-to-add-a-custom-font-to-chart-js*/
+            defaultFontFamily: Chart.defaults.global.defaultFontFamily = "'Baloo Da 2'"
         }
     });
 }
